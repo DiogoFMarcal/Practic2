@@ -1,0 +1,45 @@
+<h1 class="primary-text mx-5">My tasks</h1>
+<hr>
+<div class="row">
+    <div class="col mx-5">
+        <!--list with all tasks-->
+        <h3>List of tasks</h3>
+        <div *ngIf="getTasks.length === 0">No tasks to show</div>
+        <ul class="list-group">
+            <li *ngFor="let task of getTasks" class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="col">
+                    <strong>Id: </strong>
+                    <span>{{ task.id }}</span>
+                    <br>
+                    <strong>Name: </strong>
+                    <span>{{ task.nombre }}</span>
+                    <br>
+                    <strong>Completed: </strong>
+                    <span>{{ task.completado }}</span>
+                </div>
+                <div class="col text-end">
+                    <button (click)="removeTask(task.id)" type="button" class="mx-5 btn btn-danger">Delete</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col mx-5">
+        <!--form to add a new task and to delete a task-->
+        <h3>New task</h3>
+        <div class="card p-3">
+            <form class="row" (ngSubmit)="addNewTask()">
+                <div class="input-group">
+                    <input [(ngModel)]="task.nombre" name="nombre" type="text" class="form-control" placeholder="Name">
+                </div>
+                <div class="form-check form-switch m-2">
+                    <input [(ngModel)]="task.completado" class="form-check-input" type="checkbox" id="switch1"
+                        name="completado" value="true">
+                    <label class="form-check-label" for="switch1">Completed</label>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
